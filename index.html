@@ -4,188 +4,304 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>OmniDrone — Future AI Drone Command Center</title>
-    <meta name="description" content="OmniDrone — Premium futuristic AI Drone Command Center landing page." />
+    <meta name="description" content="OmniDrone — Premium futuristic AI Drone Command Center landing & dashboard mock." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
     <style>
       :root{
-        --bg-1:#03040a;
-        --bg-2:#06101a;
-        --panel:rgba(255,255,255,0.04);
+        --bg-1:#02040a;
+        --bg-2:#07121a;
+        --panel:rgba(255,255,255,0.03);
         --muted:#9aa6b2;
         --accent:#ffd54a; /* daffodil */
-        --glass: rgba(255,255,255,0.03);
+        --accent-2:#2bd1ff;
+        --glass: rgba(255,255,255,0.028);
       }
       *{box-sizing:border-box}
-      html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui, -apple-system, "Segoe UI", Roboto, Arial;color:#e8f0f8;background:radial-gradient(800px 300px at 10% 10%, rgba(43,209,255,0.03), transparent 10%), linear-gradient(180deg,var(--bg-1),var(--bg-2));}
-      .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px}
+      html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;color:#e8f0f8;background:radial-gradient(900px 320px at 10% 8%, rgba(43,209,255,0.02), transparent 10%), linear-gradient(180deg,var(--bg-1),var(--bg-2));-webkit-font-smoothing:antialiased}
 
-      .card{
-        width:100%;max-width:1100px;border-radius:14px;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));box-shadow:0 20px 60px rgba(2,6,12,0.7);border:1px solid rgba(255,255,255,0.03);display:grid;grid-template-columns:1fr 460px;gap:24px;align-items:center;overflow:hidden
-      }
-
-      .left{padding-right:8px}
-      .brand{display:flex;align-items:center;gap:14px}
+      .container{max-width:1200px;margin:40px auto;padding:28px}
+      header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+      .brand{display:flex;align-items:center;gap:12px}
       .logo{font-weight:800;color:var(--accent);font-size:20px;letter-spacing:0.6px}
-      .title{font-size:34px;margin:6px 0 8px;line-height:1.02;font-weight:800}
-      .subtitle{color:var(--muted);margin:0 0 18px}
-      .desc{color:rgba(230,238,246,0.9);margin-bottom:18px}
+      .tag{color:var(--muted);font-size:13px}
 
-      .ctas{display:flex;gap:12px}
-      .btn{padding:12px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:600}
-      .btn.primary{background:linear-gradient(90deg,var(--accent),#ffb84a);color:#061018}
-      .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent)}
+      /* hero */
+      .hero{display:grid;grid-template-columns:1fr 460px;gap:24px;align-items:center;padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));box-shadow:0 30px 80px rgba(2,6,12,0.7);border:1px solid rgba(255,255,255,0.03);position:relative;overflow:hidden}
+      .hero-left{padding-right:8px}
+      h1{font-size:36px;margin:0;line-height:1.02}
+      p.lead{color:var(--muted);margin:12px 0 18px}
+      .hero-ctas{display:flex;gap:12px}
+      .btn{padding:12px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
+      .btn-primary{background:linear-gradient(90deg,var(--accent),#ffb84a);color:#061018}
+      .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent)}
 
-      .features{display:flex;gap:12px;margin-top:18px}
-      .feat{background:rgba(255,255,255,0.02);padding:10px;border-radius:10px;font-size:13px;color:var(--muted)}
+      .badges{display:flex;gap:10px;margin-top:18px}
+      .badge{background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:10px;color:var(--muted);font-size:13px}
 
-      .right{position:relative;height:360px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.2));display:flex;align-items:center;justify-content:center}
-      #three-canvas{width:100%;height:100%;display:block}
+      .hero-right{position:relative;height:360px;border-radius:10px;overflow:hidden;background:linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.2));display:flex;align-items:center;justify-content:center}
+      canvas#drone-canvas{width:100%;height:100%;display:block}
 
-      /* subtle network overlay */
+      /* network overlay */
       .network{position:absolute;inset:0;pointer-events:none}
+      .network line{stroke:rgba(43,209,255,0.06);stroke-width:0.8}
 
-      .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+      /* dashboard mock */
+      .dashboard{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+      .card{background:linear-gradient(180deg, rgba(255,255,255,0.014), rgba(255,255,255,0.008));padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(3,8,12,0.6)}
 
-      /* small screens */
-      @media (max-width:1000px){
-        .card{grid-template-columns:1fr;}
-        .right{height:320px}
-      }
+      .status{display:flex;gap:12px;align-items:center}
+      .status .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,var(--accent),#ffbf4a);box-shadow:0 0 10px rgba(255,213,74,0.45)}
+      .metrics{display:flex;gap:12px;margin-top:10px}
+      .metric{flex:1;background:var(--glass);padding:10px;border-radius:8px;text-align:center}
+      .metric .label{color:var(--muted);font-size:12px}
+      .metric .value{font-weight:800;margin-top:6px;font-size:18px}
 
-      /* tiny animation for link */
-      .repo-link{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-weight:700;text-decoration:none}
-      .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(90deg,var(--accent),#ffb84a);box-shadow:0 0 12px rgba(255,213,74,0.6)}
+      .map-placeholder{height:160px;background:linear-gradient(180deg, rgba(43,209,255,0.02), rgba(255,213,74,0.02));border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
 
-      /* small accessibility focus */
-      .btn:focus{outline:3px solid rgba(255,213,74,0.14)}
+      .camera-placeholder{height:160px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted)}
+
+      .detections{list-style:none;padding:0;margin:8px 0}
+      .detections li{display:flex;justify-content:space-between;padding:8px;border-radius:8px;background:rgba(255,255,255,0.01);margin-bottom:8px}
+      .tag{background:rgba(255,213,74,0.08);color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700}
+
+      .alerts{margin-top:8px}
+      .alert-item{background:rgba(255,107,107,0.06);padding:8px;border-radius:8px;color:#ffdadd}
+
+      footer{margin-top:22px;color:var(--muted);text-align:center;font-size:13px}
+
+      @media (max-width:1100px){.hero{grid-template-columns:1fr} .dashboard{grid-template-columns:1fr}} 
+
+      /* subtle entrance */
+      .fade-in{animation:fade .9s ease both}
+      @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
     </style>
   </head>
+
   <body>
-    <div class="wrap">
-      <div class="card">
-        <div class="left">
-          <div class="brand">
-            <div class="logo">OmniDrone</div>
-            <div style="color:var(--muted);font-size:13px">AI Drone Command Center</div>
+    <div class="container">
+      <header>
+        <div class="brand">
+          <div class="logo">OmniDrone</div>
+          <div class="tag">AI Drone Command Center</div>
+        </div>
+        <nav>
+          <a class="btn btn-ghost" href="https://github.com/projectscoms/omnidrone" target="_blank">View on GitHub</a>
+        </nav>
+      </header>
+
+      <section class="hero fade-in" aria-label="OmniDrone hero">
+        <div class="hero-left">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#ffb84a);display:flex;align-items:center;justify-content:center;color:#061018;font-weight:800">OD</div>
+            <div style="color:var(--muted);font-size:13px">Future • Intelligent • Autonomous</div>
           </div>
 
-          <h1 class="title">Future AI Drone Command Center — Intelligent Decision Support</h1>
-          <p class="subtitle">Premium, futuristic control UX for multi-drone operations. Dark mode, daffodil accents, live telemetry & 3D visualization.</p>
+          <h1>OmniDrone — Future AI Drone Command Center</h1>
+          <p class="lead">একটি প্রিমিয়াম, ফিউচারিস্টিক এবং পেশাদার ড্যাশবোর্ড যা রিয়েল‑টাইম ড্রোন টেলিমেট্রি, AI ডিটেকশন, রিস্ক অ্যানালাইসিস এবং স্বয়ংক্রিয় রিপোর্টিং প্রদর্শন করবে।</p>
 
-          <p class="desc">OmniDrone turns raw drone telemetry into actionable intelligence — real‑time detections, risk scoring, 3D flight visualization and automated incident reports. This landing page is a visual preview; the interactive dashboard runs locally (or can be deployed to Vercel).</p>
-
-          <div class="ctas">
-            <a class="btn primary" href="https://github.com/projectscoms/omnidrone" target="_blank" rel="noopener">View Repo</a>
-            <a class="btn ghost" href="README.md">Run Locally</a>
+          <div class="hero-ctas">
+            <button class="btn btn-primary" onclick="scrollToDashboard()">Open Dashboard Mock</button>
+            <a class="btn btn-ghost" href="#" onclick="downloadGuide();return false">Download Brief</a>
           </div>
 
-          <div class="features" aria-hidden>
-            <div class="feat">3D Drone Visualization (Three.js)</div>
-            <div class="feat">AI Detection & Risk Analysis</div>
-            <div class="feat">Live Camera Placeholder</div>
-            <div class="feat">PDF Report Generation</div>
+          <div class="badges">
+            <div class="badge">Dark Theme</div>
+            <div class="badge">3D Visualization</div>
+            <div class="badge">AI Detection</div>
+            <div class="badge">Auto Reports</div>
           </div>
-
-          <div style="margin-top:18px;color:var(--muted);font-size:13px">Want full interactive demo hosted? Reply & I can deploy to Vercel and give a public URL.</div>
         </div>
 
-        <div class="right" aria-hidden>
-          <canvas id="three-canvas"></canvas>
-          <svg class="network" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 360" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#00e5ff" stop-opacity="0.09"/><stop offset="1" stop-color="#ffd54a" stop-opacity="0.06"/></linearGradient>
-            </defs>
-            <g stroke="url(#g1)" stroke-width="0.6" fill="none" opacity="0.9">
-              <path d="M40 300 C140 200, 260 320, 360 240 C460 160, 560 300, 760 220"/>
-              <path d="M20 220 C120 140, 240 260, 340 180 C440 100, 560 240, 760 160"/>
+        <div class="hero-right" aria-hidden>
+          <canvas id="drone-canvas"></canvas>
+
+          <svg class="network" viewBox="0 0 800 360" preserveAspectRatio="none">
+            <g>
+              <line x1="40" y1="300" x2="140" y2="230"></line>
+              <line x1="180" y1="60" x2="320" y2="110"></line>
+              <line x1="400" y1="220" x2="520" y2="160"></line>
+              <line x1="560" y1="80" x2="760" y2="140"></line>
             </g>
-            <g fill="#2bd1ff" opacity="0.06">
-              <circle cx="180" cy="80" r="22" />
-              <circle cx="620" cy="120" r="16" />
-              <circle cx="430" cy="260" r="10" />
+            <g fill="var(--accent-2)" opacity="0.06">
+              <circle cx="120" cy="90" r="22"></circle>
+              <circle cx="660" cy="120" r="16"></circle>
+              <circle cx="420" cy="260" r="10"></circle>
             </g>
           </svg>
         </div>
-      </div>
+      </section>
+
+      <!-- Dashboard mock -->
+      <section id="dashboard" class="fade-in">
+        <div class="dashboard" style="margin-top:18px">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="color:var(--muted);font-size:13px">Drone Status</div>
+                <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+                  <div class="dot" id="status-dot"></div>
+                  <div style="font-weight:800" id="status-text">IDLE</div>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <div style="color:var(--muted);font-size:12px">Battery</div>
+                <div style="font-weight:800;font-size:18px" id="battery-text">92%</div>
+              </div>
+            </div>
+
+            <div class="metrics" style="margin-top:12px">
+              <div class="metric"><div class="label">Speed</div><div class="value" id="speed">0.0 m/s</div></div>
+              <div class="metric"><div class="label">Heading</div><div class="value" id="heading">0°</div></div>
+              <div class="metric"><div class="label">Signal</div><div class="value" id="signal">Strong</div></div>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+              <button class="btn btn-ghost" onclick="ackAlerts()">Acknowledge</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="color:var(--muted);font-size:13px">Live Camera</div>
+              <div style="color:var(--muted);font-size:12px">Low-latency placeholder</div>
+            </div>
+            <div class="camera-placeholder" style="margin-top:10px">
+              <svg width="100" height="60" viewBox="0 0 24 24"><path fill="#FFD54A" d="M5 7h10l4 4v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z"/><path fill="#000" d="M19 11l3-3v8l-3-3z"/></svg>
+              <div style="margin-top:10px;color:var(--muted)">Live camera stream placeholder</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="color:var(--muted);font-size:13px">3D Map / Flight Path</div>
+            <div class="map-placeholder" style="margin-top:10px">3D Map Placeholder (Mapbox / Cesium)</div>
+            <div style="margin-top:10px;color:var(--muted);font-size:13px">GPS: <span id="gps">37.7749, -122.4194</span></div>
+          </div>
+        </div>
+
+        <div class="dashboard" style="margin-top:14px">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center"><div style="color:var(--muted);font-size:13px">AI Detections</div><div style="color:var(--muted);font-size:12px">Confidence</div></div>
+            <ul class="detections" id="detections-list" style="margin-top:10px">
+              <li><div class="tag">Person</div><div style="opacity:0.9">81%</div></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div style="color:var(--muted);font-size:13px">Alerts</div>
+            <div class="alerts" id="alerts-box" style="margin-top:10px">
+              <div class="muted" style="color:var(--muted)">No active alerts</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="color:var(--muted);font-size:13px">Telemetry Timeline</div>
+            <div style="height:140px;margin-top:10px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted)">Timeline playback placeholder</div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        © <span id="year"></span> OmniDrone • Designed with premium dark theme & daffodil accent
+      </footer>
     </div>
 
-    <div class="footer">Preview (static) • To run the full interactive dashboard: clone the repo and run <code>npm install</code> &amp; <code>npm run dev</code></div>
-
-    <!-- Three.js (small rotating drone shader) -->
+    <!-- Libraries (CDN) -->
     <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script>
-      // Basic rotating drone-like model for visual polish
+      // set year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // basic telemetry simulator
+      const telemetry = {lat:37.7749,lng:-122.4194,battery:92,status:'IDLE',speed:0,heading:0,ai:[{label:'Person',conf:0.81}],alerts:[]}
+
+      function updateUI(){
+        document.getElementById('battery-text').textContent = Math.round(telemetry.battery) + '%'
+        document.getElementById('status-text').textContent = telemetry.status
+        document.getElementById('speed').textContent = telemetry.speed.toFixed(2) + ' m/s'
+        document.getElementById('heading').textContent = Math.round(telemetry.heading) + '°'
+        document.getElementById('gps').textContent = telemetry.lat.toFixed(6)+', '+telemetry.lng.toFixed(6)
+        document.getElementById('status-dot').style.background = telemetry.status==='ALERT' ? 'linear-gradient(90deg,#ff6b6b,#ffb0b0)' : 'linear-gradient(90deg,var(--accent),#ffb84a)'
+
+        // detections
+        const dl = document.getElementById('detections-list'); dl.innerHTML = '';
+        telemetry.ai.forEach(d => {
+          const li = document.createElement('li'); li.innerHTML = `<div class=\"tag\">${d.label}</div><div>${Math.round(d.confidence*100)}%</div>`; dl.appendChild(li)
+        })
+
+        // alerts
+        const ab = document.getElementById('alerts-box'); ab.innerHTML = '';
+        if(telemetry.alerts.length===0){ab.innerHTML = '<div style="color:var(--muted)">No active alerts</div>'}
+        else{telemetry.alerts.forEach(a=>{const d = document.createElement('div'); d.className='alert-item'; d.textContent = a.text; ab.appendChild(d)})}
+      }
+
+      // simulate updates
+      setInterval(()=>{
+        telemetry.heading = (telemetry.heading + (Math.random()*8-4))%360
+        telemetry.speed = Math.max(0, telemetry.speed + (Math.random()-0.5)*0.3)
+        telemetry.lat += (Math.random()-0.5)*0.0006*(telemetry.speed+0.5)
+        telemetry.lng += (Math.random()-0.5)*0.0006*(telemetry.speed+0.5)
+        telemetry.battery = Math.max(5, telemetry.battery - 0.03 - Math.random()*0.02)
+        telemetry.status = telemetry.battery < 12 ? 'RETURNING' : (Math.random()>0.996 ? 'ALERT' : 'IN-FLIGHT')
+        if(Math.random()>0.988){ telemetry.ai.unshift({label: Math.random()>0.5? 'Vehicle':'Person', confidence: +(0.6+Math.random()*0.4).toFixed(2)}); if(telemetry.ai.length>6) telemetry.ai.pop() }
+        telemetry.alerts = telemetry.status==='ALERT' ? [{text:'Unexpected obstacle detected',level:'high'}] : []
+        updateUI();
+      },1000)
+
+      updateUI()
+
+      // Generate PDF report (jsPDF)
+      async function generateReport(){
+        const { jsPDF } = window.jspdf
+        const doc = new jsPDF({ unit:'pt', format:'a4' })
+        doc.setFontSize(18); doc.text('OmniDrone — Incident Report', 40, 60)
+        doc.setFontSize(12); doc.text('Timestamp: ' + new Date().toLocaleString(), 40, 90)
+        doc.text('Status: ' + telemetry.status, 40, 110)
+        doc.text('Battery: ' + Math.round(telemetry.battery) + '%', 40, 130)
+        doc.text('Location: ' + telemetry.lat.toFixed(6) + ', ' + telemetry.lng.toFixed(6), 40, 150)
+        doc.text('AI Detections:', 40, 180)
+        telemetry.ai.slice(0,6).forEach((d,i)=>{doc.text(`${i+1}. ${d.label} — ${(d.confidence*100).toFixed(0)}%`, 60, 200 + i*16)})
+        doc.save('omnidrone_report_' + Date.now() + '.pdf')
+      }
+
+      function ackAlerts(){ telemetry.alerts = []; updateUI(); }
+
+      function downloadGuide(){
+        const blob = new Blob([`OmniDrone — Project Brief\n\nThis is a premium futuristic AI Drone Command Center mock (static).\n\nKey features:\n- 3D Drone Visualization\n- Live telemetry & simulated AI detections\n- Alerts & automatic report generation\n\nRun the full project locally: npm install && npm run dev`], {type:'text/plain'});
+        const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'omnidrone_brief.txt'; a.click();
+      }
+
+      function scrollToDashboard(){ document.getElementById('dashboard').scrollIntoView({behavior:'smooth'}) }
+
+      // Three.js lightweight drone for hero
       (function(){
-        const canvas = document.getElementById('three-canvas');
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        const width = canvas.clientWidth || canvas.parentElement.clientWidth;
-        const height = canvas.clientHeight || canvas.parentElement.clientHeight;
-        renderer.setSize(width, height);
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x000000);
-        const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
-        camera.position.set(0, 2.6, 6);
+        const canvas = document.getElementById('drone-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
+        function resize(){ const w = canvas.clientWidth || canvas.parentElement.clientWidth; const h = canvas.clientHeight || canvas.parentElement.clientHeight; renderer.setSize(w,h); camera.aspect = w/h; camera.updateProjectionMatrix(); }
+        const scene = new THREE.Scene(); scene.background = new THREE.Color(0x000000);
+        const camera = new THREE.PerspectiveCamera(35,1,0.1,100); camera.position.set(0,2.6,6);
+        const hemi = new THREE.HemisphereLight(0xffffff,0x222244,0.9); scene.add(hemi);
+        const dir = new THREE.DirectionalLight(0xffffff,0.9); dir.position.set(5,10,5); scene.add(dir);
 
-        const hemi = new THREE.HemisphereLight(0xffffff, 0x222244, 0.9);
-        scene.add(hemi);
-        const dir = new THREE.DirectionalLight(0xffffff, 0.9);
-        dir.position.set(5, 10, 5);
-        scene.add(dir);
+        const bodyMat = new THREE.MeshStandardMaterial({ color:0x0f1216, metalness:0.85, roughness:0.18 });
+        const body = new THREE.Mesh(new THREE.BoxGeometry(1.6,0.28,1.1), bodyMat); scene.add(body);
 
-        // Drone body
-        const bodyMat = new THREE.MeshStandardMaterial({ color: 0x11151b, metalness:0.8, roughness:0.25 });
-        const body = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.28, 1.1), bodyMat);
-        scene.add(body);
-
-        // arms and props
         const props = [];
-        const armMat = new THREE.MeshStandardMaterial({ color:0x10131a, metalness:0.7, roughness:0.25 });
-        for(let i=0;i<4;i++){
-          const angle = (i/4)*Math.PI*2;
-          const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,1.2), armMat);
-          arm.rotation.z = Math.PI/2;
-          arm.position.set(Math.cos(angle)*0.9,0,Math.sin(angle)*0.7);
-          scene.add(arm);
-          const prop = new THREE.Mesh(new THREE.BoxGeometry(0.8,0.02,0.12), new THREE.MeshStandardMaterial({color:0x000000}));
-          prop.position.set(Math.cos(angle)*1.2,0.18,Math.sin(angle)*0.9);
-          scene.add(prop);
-          props.push(prop);
-        }
+        for(let i=0;i<4;i++){ const angle=(i/4)*Math.PI*2; const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,1.2), bodyMat); arm.rotation.z = Math.PI/2; arm.position.set(Math.cos(angle)*0.9,0,Math.sin(angle)*0.7); scene.add(arm); const prop = new THREE.Mesh(new THREE.BoxGeometry(0.8,0.02,0.12), new THREE.MeshStandardMaterial({color:0x000000})); prop.position.set(Math.cos(angle)*1.2,0.18,Math.sin(angle)*0.9); scene.add(prop); props.push(prop); }
 
-        // accent glow
-        const glowMat = new THREE.MeshBasicMaterial({ color:0xffd54a, transparent:true, opacity:0.08 });
-        const glow = new THREE.Mesh(new THREE.SphereGeometry(1.6,32,32), glowMat);
-        glow.position.set(0,0.08,0);
-        scene.add(glow);
+        const glow = new THREE.Mesh(new THREE.SphereGeometry(1.6,32,32), new THREE.MeshBasicMaterial({ color:0xffd54a, transparent:true, opacity:0.06 })); glow.position.set(0,0.08,0); scene.add(glow);
 
-        const pointsGeo = new THREE.BufferGeometry();
-        const count = 80;
-        const positions = new Float32Array(count*3);
-        for(let i=0;i<count;i++){positions[i*3]=(Math.random()-0.5)*8;positions[i*3+1]=(Math.random()-0.5)*3;positions[i*3+2]=(Math.random()-0.5)*8}
-        pointsGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
-        const points = new THREE.Points(pointsGeo, new THREE.PointsMaterial({color:0x2bd1ff, size:0.04, transparent:true, opacity:0.12}));
-        scene.add(points);
+        const pointsGeo = new THREE.BufferGeometry(); const count = 80; const positions = new Float32Array(count*3);
+        for(let i=0;i<count;i++){ positions[i*3]=(Math.random()-0.5)*8; positions[i*3+1]=(Math.random()-0.5)*3; positions[i*3+2]=(Math.random()-0.5)*8 }
+        pointsGeo.setAttribute('position', new THREE.BufferAttribute(positions,3)); const points = new THREE.Points(pointsGeo, new THREE.PointsMaterial({color:0x2bd1ff,size:0.04,transparent:true,opacity:0.12})); scene.add(points);
 
-        let t=0;
-        function animate(){
-          t+=0.01;
-          body.rotation.y = 0.2*Math.sin(t/4);
-          glow.material.opacity = 0.06+0.04*Math.sin(t*2);
-          points.rotation.y = t*0.02;
-          props.forEach((p,i)=>p.rotation.y = t*(6+i));
-          renderer.render(scene,camera);
-          requestAnimationFrame(animate);
-        }
-        animate();
-
-        // handle resize
-        function onResize(){
-          const w = canvas.parentElement.clientWidth; const h = canvas.parentElement.clientHeight;
-          renderer.setSize(w,h); camera.aspect = w/h; camera.updateProjectionMatrix();
-        }
-        window.addEventListener('resize', onResize);
+        let t=0; function animate(){ t+=0.01; body.rotation.y = 0.2*Math.sin(t/4); glow.material.opacity = 0.06+0.04*Math.sin(t*2); points.rotation.y = t*0.02; props.forEach((p,i)=>p.rotation.y = t*(6+i)); renderer.render(scene,camera); requestAnimationFrame(animate); }
+        resize(); animate(); window.addEventListener('resize', resize);
       })();
     </script>
   </body>
