@@ -1,18 +1,192 @@
 <!doctype html>
-<html lang="en">
+<html lang="bn">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>OmniDrone — AI Drone Command Center</title>
-    <meta name="description" content="OmniDrone — AI-powered Drone Command Center. Run the Next.js app for full dashboard." />
-    <style>body{background:#05060a;color:#e6eef6;font-family:Inter,system-ui,Arial;padding:40px;text-align:center}a{color:#ffd54a}</style>
+    <title>OmniDrone — Future AI Drone Command Center</title>
+    <meta name="description" content="OmniDrone — Premium futuristic AI Drone Command Center landing page." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --bg-1:#03040a;
+        --bg-2:#06101a;
+        --panel:rgba(255,255,255,0.04);
+        --muted:#9aa6b2;
+        --accent:#ffd54a; /* daffodil */
+        --glass: rgba(255,255,255,0.03);
+      }
+      *{box-sizing:border-box}
+      html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui, -apple-system, "Segoe UI", Roboto, Arial;color:#e8f0f8;background:radial-gradient(800px 300px at 10% 10%, rgba(43,209,255,0.03), transparent 10%), linear-gradient(180deg,var(--bg-1),var(--bg-2));}
+      .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px}
+
+      .card{
+        width:100%;max-width:1100px;border-radius:14px;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));box-shadow:0 20px 60px rgba(2,6,12,0.7);border:1px solid rgba(255,255,255,0.03);display:grid;grid-template-columns:1fr 460px;gap:24px;align-items:center;overflow:hidden
+      }
+
+      .left{padding-right:8px}
+      .brand{display:flex;align-items:center;gap:14px}
+      .logo{font-weight:800;color:var(--accent);font-size:20px;letter-spacing:0.6px}
+      .title{font-size:34px;margin:6px 0 8px;line-height:1.02;font-weight:800}
+      .subtitle{color:var(--muted);margin:0 0 18px}
+      .desc{color:rgba(230,238,246,0.9);margin-bottom:18px}
+
+      .ctas{display:flex;gap:12px}
+      .btn{padding:12px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:600}
+      .btn.primary{background:linear-gradient(90deg,var(--accent),#ffb84a);color:#061018}
+      .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent)}
+
+      .features{display:flex;gap:12px;margin-top:18px}
+      .feat{background:rgba(255,255,255,0.02);padding:10px;border-radius:10px;font-size:13px;color:var(--muted)}
+
+      .right{position:relative;height:360px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.2));display:flex;align-items:center;justify-content:center}
+      #three-canvas{width:100%;height:100%;display:block}
+
+      /* subtle network overlay */
+      .network{position:absolute;inset:0;pointer-events:none}
+
+      .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+      /* small screens */
+      @media (max-width:1000px){
+        .card{grid-template-columns:1fr;}
+        .right{height:320px}
+      }
+
+      /* tiny animation for link */
+      .repo-link{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-weight:700;text-decoration:none}
+      .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(90deg,var(--accent),#ffb84a);box-shadow:0 0 12px rgba(255,213,74,0.6)}
+
+      /* small accessibility focus */
+      .btn:focus{outline:3px solid rgba(255,213,74,0.14)}
+    </style>
   </head>
   <body>
-    <h1>OmniDrone</h1>
-    <p>AI Drone Command Center</p>
-    <p>This repository contains a Next.js dashboard project. To run locally:</p>
-    <pre>npm install
-npm run dev</pre>
-    <p>Open <a href="/">/</a> after starting the dev server.</p>
+    <div class="wrap">
+      <div class="card">
+        <div class="left">
+          <div class="brand">
+            <div class="logo">OmniDrone</div>
+            <div style="color:var(--muted);font-size:13px">AI Drone Command Center</div>
+          </div>
+
+          <h1 class="title">Future AI Drone Command Center — Intelligent Decision Support</h1>
+          <p class="subtitle">Premium, futuristic control UX for multi-drone operations. Dark mode, daffodil accents, live telemetry & 3D visualization.</p>
+
+          <p class="desc">OmniDrone turns raw drone telemetry into actionable intelligence — real‑time detections, risk scoring, 3D flight visualization and automated incident reports. This landing page is a visual preview; the interactive dashboard runs locally (or can be deployed to Vercel).</p>
+
+          <div class="ctas">
+            <a class="btn primary" href="https://github.com/projectscoms/omnidrone" target="_blank" rel="noopener">View Repo</a>
+            <a class="btn ghost" href="README.md">Run Locally</a>
+          </div>
+
+          <div class="features" aria-hidden>
+            <div class="feat">3D Drone Visualization (Three.js)</div>
+            <div class="feat">AI Detection & Risk Analysis</div>
+            <div class="feat">Live Camera Placeholder</div>
+            <div class="feat">PDF Report Generation</div>
+          </div>
+
+          <div style="margin-top:18px;color:var(--muted);font-size:13px">Want full interactive demo hosted? Reply & I can deploy to Vercel and give a public URL.</div>
+        </div>
+
+        <div class="right" aria-hidden>
+          <canvas id="three-canvas"></canvas>
+          <svg class="network" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 360" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#00e5ff" stop-opacity="0.09"/><stop offset="1" stop-color="#ffd54a" stop-opacity="0.06"/></linearGradient>
+            </defs>
+            <g stroke="url(#g1)" stroke-width="0.6" fill="none" opacity="0.9">
+              <path d="M40 300 C140 200, 260 320, 360 240 C460 160, 560 300, 760 220"/>
+              <path d="M20 220 C120 140, 240 260, 340 180 C440 100, 560 240, 760 160"/>
+            </g>
+            <g fill="#2bd1ff" opacity="0.06">
+              <circle cx="180" cy="80" r="22" />
+              <circle cx="620" cy="120" r="16" />
+              <circle cx="430" cy="260" r="10" />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Preview (static) • To run the full interactive dashboard: clone the repo and run <code>npm install</code> &amp; <code>npm run dev</code></div>
+
+    <!-- Three.js (small rotating drone shader) -->
+    <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+    <script>
+      // Basic rotating drone-like model for visual polish
+      (function(){
+        const canvas = document.getElementById('three-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        const width = canvas.clientWidth || canvas.parentElement.clientWidth;
+        const height = canvas.clientHeight || canvas.parentElement.clientHeight;
+        renderer.setSize(width, height);
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+        const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
+        camera.position.set(0, 2.6, 6);
+
+        const hemi = new THREE.HemisphereLight(0xffffff, 0x222244, 0.9);
+        scene.add(hemi);
+        const dir = new THREE.DirectionalLight(0xffffff, 0.9);
+        dir.position.set(5, 10, 5);
+        scene.add(dir);
+
+        // Drone body
+        const bodyMat = new THREE.MeshStandardMaterial({ color: 0x11151b, metalness:0.8, roughness:0.25 });
+        const body = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.28, 1.1), bodyMat);
+        scene.add(body);
+
+        // arms and props
+        const props = [];
+        const armMat = new THREE.MeshStandardMaterial({ color:0x10131a, metalness:0.7, roughness:0.25 });
+        for(let i=0;i<4;i++){
+          const angle = (i/4)*Math.PI*2;
+          const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,1.2), armMat);
+          arm.rotation.z = Math.PI/2;
+          arm.position.set(Math.cos(angle)*0.9,0,Math.sin(angle)*0.7);
+          scene.add(arm);
+          const prop = new THREE.Mesh(new THREE.BoxGeometry(0.8,0.02,0.12), new THREE.MeshStandardMaterial({color:0x000000}));
+          prop.position.set(Math.cos(angle)*1.2,0.18,Math.sin(angle)*0.9);
+          scene.add(prop);
+          props.push(prop);
+        }
+
+        // accent glow
+        const glowMat = new THREE.MeshBasicMaterial({ color:0xffd54a, transparent:true, opacity:0.08 });
+        const glow = new THREE.Mesh(new THREE.SphereGeometry(1.6,32,32), glowMat);
+        glow.position.set(0,0.08,0);
+        scene.add(glow);
+
+        const pointsGeo = new THREE.BufferGeometry();
+        const count = 80;
+        const positions = new Float32Array(count*3);
+        for(let i=0;i<count;i++){positions[i*3]=(Math.random()-0.5)*8;positions[i*3+1]=(Math.random()-0.5)*3;positions[i*3+2]=(Math.random()-0.5)*8}
+        pointsGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+        const points = new THREE.Points(pointsGeo, new THREE.PointsMaterial({color:0x2bd1ff, size:0.04, transparent:true, opacity:0.12}));
+        scene.add(points);
+
+        let t=0;
+        function animate(){
+          t+=0.01;
+          body.rotation.y = 0.2*Math.sin(t/4);
+          glow.material.opacity = 0.06+0.04*Math.sin(t*2);
+          points.rotation.y = t*0.02;
+          props.forEach((p,i)=>p.rotation.y = t*(6+i));
+          renderer.render(scene,camera);
+          requestAnimationFrame(animate);
+        }
+        animate();
+
+        // handle resize
+        function onResize(){
+          const w = canvas.parentElement.clientWidth; const h = canvas.parentElement.clientHeight;
+          renderer.setSize(w,h); camera.aspect = w/h; camera.updateProjectionMatrix();
+        }
+        window.addEventListener('resize', onResize);
+      })();
+    </script>
   </body>
 </html>
